@@ -25,19 +25,28 @@ let askGuess = () => {
 };
 
 
-let randomInRange =(min, max) =>{
-    const minNumber = Math.ceil(min);
-    const maxNumber = Math.floor(max);
+let randomInRange = (min, max) => {
+    const minNumber = Math.ceil(+min);
+    const maxNumber = Math.floor(+max);
     secretNum = Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber); 
+    askGuess()
   }
 
 let askRange = () => {
     rl.question("Gimme a LOW number ", (minNumber) => {
+        if(isNaN(minNumber)){
+            console.log("nice try...")
+            askRange()
+        }
         rl.question("Gimme a HIGH number ", (maxNumber) => {
-            randomInRange(minNumber, maxNumber);
+            if(isNaN(maxNumber)){
+                console.log("nice try...")
+            } else {
+                randomInRange(minNumber, maxNumber);
+            }
         });
     });
 };
-
+askRange();
 // START GAME CALL!!!!!!
-askGuess();
+// askGuess();
