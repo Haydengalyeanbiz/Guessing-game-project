@@ -1,6 +1,7 @@
 const readline = require('node:readline');
 const { stdin: input, stdout: output } = require('node:process');
 const rl = readline.createInterface({ input, output });
+/*-------------------------------------------------------LIBRARIES------------------------------------------------------------------*/
 let secretNum;
 let checkGuess = (number) => {
     if(+number > secretNum){
@@ -24,11 +25,19 @@ let askGuess = () => {
 };
 
 
-let randomInRange = (min, max) => {
-    secretNum = Math.floor(Math.random() * (max - min) + min);
-}
+let randomInRange =(min, max) =>{
+    const minNumber = Math.ceil(min);
+    const maxNumber = Math.floor(max);
+    secretNum = Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber); 
+  }
 
-console.log(randomInRange(1, 10));
+let askRange = () => {
+    rl.question("Gimme a LOW number ", (minNumber) => {
+        rl.question("Gimme a HIGH number ", (maxNumber) => {
+            randomInRange(minNumber, maxNumber);
+        });
+    });
+};
 
 // START GAME CALL!!!!!!
-// askGuess();
+askGuess();
